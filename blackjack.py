@@ -42,8 +42,8 @@ def deal_card(frame):
 
 
 def score_hand(hand):
-    # Calculate the total score of all cards in the list.
-    # Only one ace can have the value 11, and this will be reduce to 1 if the hand would bust.
+    # calculate the total score of all cards in the list.
+    # only one ace can have the value 11, and this will be reduce to 1 if the hand would bust.
     score = 0
     ace = False
     for next_card in hand:
@@ -90,10 +90,12 @@ def new_game():
     global player_card_frame
     global dealer_hand
     global player_hand
+
     # embedded frame to hold card images
     dealer_card_frame.destroy()
     dealer_card_frame = tkinter.Frame(card_frame, background="green")
     dealer_card_frame.grid(row=0, column=1, sticky="ew", rowspan=2)
+
     # embedded frame to hold card images
     player_card_frame.destroy()
     player_card_frame = tkinter.Frame(card_frame, background="green")
@@ -101,7 +103,7 @@ def new_game():
 
     result_text.set("")
 
-    # Create the list to store the dealer's and player's hands
+    # create the list to store the dealer's and player's hands
     dealer_hand = []
     player_hand = []
 
@@ -115,7 +117,7 @@ def shuffle():
 
 mainWindow = tkinter.Tk()
 
-# Set up the screen and frames for the dealer and player
+# set up the screen and frames for the dealer and player
 mainWindow.title("Black Jack")
 mainWindow.geometry("640x480")
 mainWindow.configure(background="green")
@@ -124,51 +126,61 @@ result_text = tkinter.StringVar()
 result = tkinter.Label(mainWindow, textvariable=result_text)
 result.grid(row=0, column=0, columnspan=3)
 
+# create the card frame for card image
 card_frame = tkinter.Frame(mainWindow, relief="sunken", borderwidth=1, background="green")
 card_frame.grid(row=1, column=0, sticky="ew", columnspan=3, rowspan=2)
 
+# embedded label to display dealer score
 dealer_score_label = tkinter.IntVar()
 tkinter.Label(card_frame, text="Dealer", background="green", fg="white").grid(row=0, column=0)
 tkinter.Label(card_frame, textvariable=dealer_score_label, background="green", fg="white").grid(row=1, column=0)
-# embedded frame to hold the card images
+
+# embedded frame to hold the card images for dealer
 dealer_card_frame = tkinter.Frame(card_frame, background="green")
 dealer_card_frame.grid(row=0, column=1, sticky="ew", rowspan=2)
 
+# embedded label to display player score
 player_score_label = tkinter.IntVar()
-
 tkinter.Label(card_frame, text="Player", background="green", fg="white").grid(row=2, column=0)
 tkinter.Label(card_frame, textvariable=player_score_label, background="green", fg="white").grid(row=3, column=0)
-# embedded frame to hold the card images
+
+# embedded frame to hold the card images for player
 player_card_frame = tkinter.Frame(card_frame, background="green")
 player_card_frame.grid(row=2, column=1, sticky="ew", rowspan=2)
 
+# embedded frame button
 button_frame = tkinter.Frame(mainWindow)
 button_frame.grid(row=3, column=0, columnspan=3, sticky="ew")
 
+# the dealer button
 dealer_button = tkinter.Button(button_frame, text="Dealer", command=deal_dealer)
 dealer_button.grid(row=0, column=0)
 
+# the player button
 player_button = tkinter.Button(button_frame, text="Player", command=deal_player)
 player_button.grid(row=0, column=1)
 
+# the new game button
 new_game_button = tkinter.Button(button_frame, text="New Game", command=new_game)
 new_game_button.grid(row=0, column=2)
 
+# the shuffle button
 shuffle_button = tkinter.Button(button_frame, text="Shuffle", command=shuffle)
 shuffle_button.grid(row=0, column=3)
 
 # load cards
 cards = []
 load_images(cards)
-print(cards)
-# Create a new deck of cards and shuffle them
+
+# create a new deck of cards and shuffle them
 deck = list(cards)
 shuffle()
 
-# Create the list to store the dealer's and player's hands
+# create the list to store the dealer's and player's hands
 dealer_hand = []
 player_hand = []
 
+# the game starts
 new_game()
 
 mainWindow.mainloop()
