@@ -30,6 +30,21 @@ def loadImages(cardImages):
             image = tkinter.PhotoImage(file=name)
             cardImages.append((10, image))
 
+def dealCard(frame):
+    # pop next card off top of the deck
+    nextCard = deck.pop()
+    # add image to a label and display label
+    tkinter.Label(frame, image=nextCard[1], relief="raised").pack(side="left")
+    # now return card's face value
+    return nextCard
+
+def dealDealer():
+    dealCard(dealerCardFrame)
+
+def dealPlayer():
+    dealCard(playerCardFrame)
+
+
 # set up screen and frames for dealer and player
 mainWindow.title("Blackjack")
 mainWindow.geometry("640x480")
@@ -60,10 +75,10 @@ playerCardFrame.grid(row=2, column=1, sticky="ew", rowspan=2)
 buttonFrame = tkinter.Frame(mainWindow)
 buttonFrame.grid(row=3, column=0, columnspan=3, sticky="w")
 
-dealerButton = tkinter.Button(buttonFrame, text="Dealer")
+dealerButton = tkinter.Button(buttonFrame, text="Dealer", command=dealDealer)
 dealerButton.grid(row=0, column=0)
 
-playerButton = tkinter.Button(buttonFrame, text="Player")
+playerButton = tkinter.Button(buttonFrame, text="Player", command=dealPlayer)
 playerButton.grid(row=0, column=1)
 
 # load cards
