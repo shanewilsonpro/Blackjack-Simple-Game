@@ -1,4 +1,4 @@
 # Blackjack Simple Game
 
 # Demo
-![](resources/Blackjack-Game-Demo.mov)
+![](resources/Blackjack-Game-Demo.gif)
